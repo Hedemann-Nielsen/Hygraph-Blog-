@@ -1,7 +1,7 @@
 import { useGetQuery } from "../components/Hooks/useGetQuery";
 import { getAllBlogs } from "../components/Queryes/GetAllBlogs";
 
-export const Home = () => {
+export const Blog = () => {
 	const { data, isLoading, error } = useGetQuery(getAllBlogs, "allBlogs");
 
 	if (isLoading) {
@@ -17,5 +17,11 @@ export const Home = () => {
 	console.log("Data", data);
 	console.log("Seneste Blog post", latestBlogPost);
 
-	return <></>;
+	return (
+		<>
+			<h3>{latestBlogPost.titleOnBlogpost}</h3>
+			<p>{latestBlogPost.contentOnBlogPost}</p>
+			<p>{latestBlogPost.createdAt}</p>
+		</>
+	);
 };
