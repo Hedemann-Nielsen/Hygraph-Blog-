@@ -1,0 +1,10 @@
+innerHTML = <p>....
+
+react = DangereslySetInnterHTML = DomPurify(Data)
+
+For at det ikke kan hackes ved at tilgå tags og lave om til script tag og skrive kode som udføre ting køres Sanetize
+
+Libery
+Dom Purify npm install
+
+Smid skidtet (alle HTML)
