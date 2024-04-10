@@ -1,8 +1,15 @@
+// Blog.jsx
+import React from "react";
 import { useGetQuery } from "../components/Hooks/useGetQuery";
 import { getAllBlogs } from "../components/Queryes/GetAllBlogs";
+import { BlogPost } from "../components/BlogPost";
 
 export const Blog = () => {
-	const { data, isLoading, error } = useGetQuery(getAllBlogs, "allBlogs");
+	const {
+		data: allBlogs,
+		isLoading,
+		error,
+	} = useGetQuery(getAllBlogs, "allBlogs");
 
 	if (isLoading) {
 		return <span>Loading....</span>;
@@ -12,16 +19,19 @@ export const Blog = () => {
 		return <span>{error.message}</span>;
 	}
 
-	const latestBlogPost = data.blaoPosts[data.blaoPosts.length - 1];
+	console.log("data:", allBlogs);
 
-	console.log("Data", data);
-	console.log("Seneste Blog post", latestBlogPost);
+	// Kopier arrayet og omvend rækkefølgen af kopien
+	const reversedBlogPosts = [...allBlogs.blaoPosts].reverse();
 
 	return (
 		<>
-			<h3>{latestBlogPost.titleOnBlogpost}</h3>
-			<p>{latestBlogPost.contentOnBlogPost}</p>
-			<p>{latestBlogPost.createdAt}</p>
+			<h2 className="text-2xl text-center m-5 uppercase font-semibold">
+				Alle Blog indlæg
+			</h2>
+			{reversedBlogPosts.map((blogPost) => (
+				<BlogPost key={blogPost.id} blogPost={blogPost} />
+			))}
 		</>
 	);
 };
